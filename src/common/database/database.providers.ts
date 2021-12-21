@@ -12,12 +12,12 @@ export const databaseProviders = [
             console.log(configService, '拿到了服务了'); // ConfigModule 是全局模块
             // 异步提供者，等数据库连接成功后，才能往下走
             return await createConnection({
-                type: 'mysql',
-                host: '47.75.135.12',
+                type: '',
+                host: '',
                 port: 6303,
-                username: 'net_office_o',
-                password: 'ECzTsnSPzu0rQmT0u3L4WjJ9',
-                database: 'test',
+                username: '',
+                password: '',
+                database: '',
                 entities: [
                     './dist/modules/**/*.entity.js', // 这里引用打包后的文件目录
                 ],
