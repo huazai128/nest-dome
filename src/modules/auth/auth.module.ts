@@ -10,7 +10,7 @@ import { SECRET } from "@app/common/constants/system.constant";
 @Module({
     imports: [
         UserModule,
-        PassportModule,
+        PassportModule.register({ defaultStrategy: 'jwt' }), // 默认策略
         JwtModule.register({
             secret: SECRET,
             signOptions: { expiresIn: 600000 },

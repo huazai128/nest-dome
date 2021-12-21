@@ -2,7 +2,6 @@ import { decodeMd5 } from "@app/utils/util";
 import { Injectable } from "@nestjs/common";
 import { UserService } from "../users/user.service";
 import { JwtService } from '@nestjs/jwt';
-import { CreateUserDto } from "../users/dto/create-user.dto";
 
 @Injectable()
 export class AuthService {
