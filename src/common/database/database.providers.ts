@@ -1,25 +1,26 @@
 import { createConnection } from "typeorm";
-import { DB_CONN } from "../constants/config.constant";
 import { DB_CONNECTION_TOKEN, DATABASE_CONNECTION } from "../constants/system.constant";
 import { ConfigService } from "../dynamic/config/config.service";
 import * as mongoose from 'mongoose';
+import { join } from 'path'
 
 // 以下是异步数据库连接
 export const databaseProviders = [
     {
         provide: DB_CONNECTION_TOKEN, //  mysql 数据库
         useFactory: async (configService: ConfigService) => { // 使用工厂提供者
-            console.log(configService, '拿到了服务了'); // ConfigModule 是全局模块
+            console.log(configService.config, '拿到了服务了'); // ConfigModule 是全局模块
+            const { type, host, port, username, password, database } = configService.config;
             // 异步提供者，等数据库连接成功后，才能往下走
             return await createConnection({
-                type: '',
-                host: '',
-                port: 6303,
-                username: '',
-                password: '',
-                database: '',
+                type,
+                host,
+                port,
+                username,
+                password,
+                database,
                 entities: [
-                    './dist/modules/**/*.entity.js', // 这里引用打包后的文件目录
+                    join(__dirname, "../../modules/**/*.entity{.ts,.js}") // 这里路径必须要正确
                 ],
                 synchronize: true,
             }).then((connection) => {
@@ -34,11 +35,10 @@ export const databaseProviders = [
     {
         provide: DATABASE_CONNECTION, //  mongodb 数据库
         useFactory: async (configService: ConfigService) => {
-            console.log(configService)
             let reconnectionTask = null;
             const RECONNECT_INTERVAL = 6000
             function connect() {
-                return mongoose.connect(DB_CONN)
+                return mongoose.connect(configService.config.dbUrl)
             }
 
             mongoose.connection.on('disconnected', () => {

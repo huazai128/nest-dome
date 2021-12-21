@@ -1,6 +1,7 @@
 import { Module, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { type, host, port, username, password, database, DB_CONN } from './common/constants/config.constant'
 
 // 中间件
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
@@ -18,7 +19,7 @@ import { UserModule } from './modules/users/user.module';
 @Module({
     imports: [
         // 基础模块
-        ConfigModule.register({ name: 11, dev: 111 }),
+        ConfigModule.register({ type, host, port, username, password, database, dbUrl: DB_CONN }),
         DatabaseModule,
         CoreModule,
 
