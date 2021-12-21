@@ -2,3 +2,4 @@ export const DB_CONNECTION_TOKEN = 'DB_CONNECTION_TOKEN'
 export const REPOSITORY = '_REPOSITORY'
 export const CONFIG_OPTIONS = 'CONFIG_OPTIONS';
 export const DATABASE_CONNECTION = 'DATABASE_CONNECTION'
+export const SECRET = 'hahhahah----'

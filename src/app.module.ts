@@ -15,6 +15,7 @@ import { CoreModule } from '@app/core/core.module';
 import { CatsModule } from './modules/cats/cats.module';
 import { EventsModule } from './modules/events/events.module';
 import { UserModule } from './modules/users/user.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
     imports: [
@@ -24,6 +25,7 @@ import { UserModule } from './modules/users/user.module';
         CoreModule,
 
         // 业务模块
+        AuthModule,
         UserModule,
         CatsModule,
         EventsModule,

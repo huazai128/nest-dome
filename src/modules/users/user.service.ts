@@ -20,14 +20,17 @@ export class UserService {
      * @memberof UserService
      */
     async create(createUserDto: CreateUserDto): Promise<User | any> {
-        const user = new User(); // 密码是明文传递
+        const user = new User();
         const username = await this.findNameOne(createUserDto.username)
-        if (username) {
+        console.log(username, 'username')
+        if (!!username) {
             return { msg: '用户已存在' }
         } else {
+            console.log(createUserDto)
             user.username = createUserDto.username
             // 密码加密
             user.password = decodeMd5(createUserDto.password);
+            console.log(user, 'user')
             return this.userRepository.save(user)
         }
     }
@@ -58,7 +61,7 @@ export class UserService {
      * @memberof UserService
      */
     findNameOne(username: string): Promise<User> {
-        return this.userRepository.findOne(username)
+        return this.userRepository.findOne({ username: username })
     }
 
 }
