@@ -37,6 +37,7 @@ export class AppController {
     @UseGuards(JwtAuthGuard)
     @Get('profile') // 需要在Authorization: Bearer 添加toekn
     getProfile(@Request() req) {
+        // 这里能直接拿到用户信息
         console.log(req.user, '=======')
         return req.user;
     }

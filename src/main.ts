@@ -4,17 +4,21 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { ErrorExceptionFilter } from './common/filters/error-exception.filter';
 import { getServerIp } from './utils/util';
-
+import * as helmet from 'helmet';
 // import { join } from 'path';
 // import * as ejs from 'ejs'
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+    // 使用模板引起
     // app.useStaticAssets(join(__dirname, '..', 'public'));
     // app.setBaseViewsDir(join(__dirname, '..', 'views'));
     // app.setViewEngine('html');
     // app.engine('html', ejs.renderFile);
+
+    // 安全帽
+    app.use(helmet())
 
     app.useGlobalPipes(new ValidationPipe()); // 全局管道注册
     // app.useGlobalInterceptors(); // 全局拦截器注册

@@ -13,7 +13,7 @@ import { SECRET } from "@app/common/constants/system.constant";
         PassportModule.register({ defaultStrategy: 'jwt' }), // 默认策略
         JwtModule.register({
             secret: SECRET,
-            signOptions: { expiresIn: 600000 },
+            signOptions: { expiresIn: 600000 }, // 设置过期时间
         })
     ],
     providers: [AuthService, LocalStrategy, JwtStrategy],
