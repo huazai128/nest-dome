@@ -18,8 +18,8 @@ export class Cats {
 
     @IsNotEmpty({ message: '年龄为空？' })
     @IsInt({ message: '数字?' })
-    @Min(0)
-    @Max(110)
+    @Min(0, { message: '最小为0岁' })
+    @Max(110, { message: '最大为110岁' })
     @prop({ required: true })
     age: number
 

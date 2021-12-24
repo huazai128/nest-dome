@@ -8,9 +8,7 @@ export class AuthService {
     constructor(
         private readonly userService: UserService,
         private readonly jwtService: JwtService
-    ) {
-
-    }
+    ) { }
 
     /**
      * 验证用户

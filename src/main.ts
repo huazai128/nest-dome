@@ -20,7 +20,11 @@ async function bootstrap() {
     // 安全帽
     app.use(helmet())
 
-    app.useGlobalPipes(new ValidationPipe()); // 全局管道注册
+    app.useGlobalPipes(new ValidationPipe({ // 基本配置查看https://docs.nestjs.cn/8/techniques?id=%e9%aa%8c%e8%af%81
+        enableDebugMessages: true, // 打印详情
+        disableErrorMessages: true, // 禁止错误信息返回给用户
+        transform: true, // 将普通Javascript 对象转成DTO类
+    })); // 全局管道注册
     // app.useGlobalInterceptors(); // 全局拦截器注册
     app.useGlobalFilters(new ErrorExceptionFilter()) // 全局过滤器
     app.enableCors({ // 解决跨域
@@ -28,6 +32,7 @@ async function bootstrap() {
     });
 
     await app.listen(3001);
+    console.log(process.env.NODE_ENV); // 判断环境
     console.log(`Application is running on: http://${getServerIp()}:3001`);
 
 }
